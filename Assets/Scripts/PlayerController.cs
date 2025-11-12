@@ -7,6 +7,7 @@ public class NewBehaviourScript : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private Transform pickUpPoint;
     private Animator anim;
     private Rigidbody2D rb;
     private enum Direction { Up, Down, Left, Right }
@@ -18,7 +19,6 @@ public class NewBehaviourScript : MonoBehaviour
         rb.gravityScale = 0;
     }
 
-    // Update is called once per frame
     void Update()
     {
         Move();
@@ -31,24 +31,34 @@ public class NewBehaviourScript : MonoBehaviour
         rb.velocity = movement * moveSpeed;
         if (MoveX > 0)
         {
+            pickUpPoint.transform.localPosition = new Vector3(0.123f, -0.1f, 0f);
+            pickUpPoint.transform.localRotation = Quaternion.Euler(0, 0, 0);
             transform.rotation = Quaternion.Euler(0, 0, 0);
             anim.Play("FacingRight");
         }
         else if (MoveX < 0)
         {
+            pickUpPoint.transform.localPosition = new Vector3(0.123f, -0.1f, 0f);
+            pickUpPoint.transform.localRotation = Quaternion.Euler(0, 0, 0);
             transform.rotation = Quaternion.Euler(0, 180, 0);
             anim.Play("FacingRight");
         }
         else if (MoveY > 0)
         {
+            pickUpPoint.transform.localPosition = new Vector3(-0.19f, 0.45f, 0f);
+            pickUpPoint.transform.localRotation = Quaternion.Euler(0, 0, 90);
             anim.Play("FacingUp");
         }
         else if (MoveY < 0)
         {
+            pickUpPoint.transform.localPosition = new Vector3( 0f, -0.36f, 0f);
+            pickUpPoint.transform.localRotation = Quaternion.Euler(0, 0, -90);
             anim.Play("FacingDown");
         }
         else
         {
+            pickUpPoint.transform.localPosition = new Vector3(0.123f, -0.1f, 0f);
+            pickUpPoint.transform.localRotation = Quaternion.Euler(0, 0, 0);
             anim.Play("Idle");
         }
     }
